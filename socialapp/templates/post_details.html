@@ -1,9 +1,28 @@
 {% extends 'layout.html' %}
 {% block content %}
+  <a href="{% url 'index'%}"> Back to Home Page! </a>
   <h2>Post details</h2>
   <div class="user-post">
     <p>{{ post.author }}</p>
     <p>{{ post.date_added }}</p>
     <p>{{ post.text }}</p>
   </div>
+  <hr>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Post">
+  </form>
+  {% for comment in comments %}
+  <div>
+    <hr>
+    <p>
+      {{ comment.author }} -
+      {{ comment.date_added}}
+    </p>
+    <p>
+      {{ comment.text }}
+    </p>
+  </div>
+  {% endfor %}
 {% endblock %}
